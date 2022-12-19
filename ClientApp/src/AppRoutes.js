@@ -1,4 +1,5 @@
 import { Counter } from "./components/Counter";
+import DataTable from "./components/DataTable";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 
@@ -14,7 +15,11 @@ const AppRoutes = [
   {
     path: '/fetch-data',
     element: <FetchData />
-  }
+},
+{
+    path: '/data-table',
+    element: <DataTable />
+}
 ];
 
 export default AppRoutes;
