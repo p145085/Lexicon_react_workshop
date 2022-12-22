@@ -1,5 +1,17 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import DataTable from './DataTable';
+
+//Define an onClick event for details button that takes id from props and then route it to the
+//PersonDetails component with id. (Note: Add a new Route for PersonDetails with id param)
+//1) Define a PersonDetails component.
+//2) Define a const person variable into the PersonDetails component using useState.
+//3) Define a useEffect Hook function.
+//4) Get the id parameter using the useParams Hook function.
+//5) Call the API Get by Id and then set the fetched data to the person variable.
+//Define an onClick event for delete button that calls Delete API By Id.
+//❖ When the selected person's is removed by API, then the person list should be 
+//updated if the person was removed.
 
 const CrudDemo = () => {
     const [persons, setPersons] = useState([]);

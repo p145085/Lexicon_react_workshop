@@ -1,4 +1,6 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
+import Form from './Form';
+//To-Do: 4. Define an event on the Hide button to hide student details
 
 const DataTable = () => {
     const initialState = [
@@ -9,7 +11,8 @@ const DataTable = () => {
             age: 25,
             birthdate: '01/01/1997',
             country: 'United States',
-            city: 'New York'
+            city: 'New York',
+            showDetails: false
         },
         {
             id: 2,
@@ -18,7 +21,8 @@ const DataTable = () => {
             age: 22,
             birthdate: '01/01/2000',
             country: 'United Kingdom',
-            city: 'London'
+            city: 'London',
+            showDetails: false
         },
         {
             id: 3,
@@ -27,7 +31,8 @@ const DataTable = () => {
             age: 28,
             birthdate: '01/01/1994',
             country: 'Canada',
-            city: 'Toronto'
+            city: 'Toronto',
+            showDetails: false
         }
     ];
 
@@ -51,47 +56,23 @@ const DataTable = () => {
         );
     }
 
-    function TableAction(props) {
-        return (
-            <button type="button" {...props}>
-                {props.children}
-            </button>
-        );
-    }
-
-    const TableEdit = (props) => {
-        const [student, setStudent] = useState({ studentList });
-
-        function handleSubmit(event) {
-            event.preventDefault();
-            // Update the student using the API here
+    function TableEdit(props) {
+        const handleEdit = () => {
+            // Add code to open the form for editing the student's information
+            alert("Edit");
         }
 
         return (
-            <form onSubmit={handleSubmit}>
-                <label>
-                    First Name:
-                    <input type="text" name="firstName" value={student.firstName} onChange={event => setStudent({ ...student, firstName: event.target.value })} />
-                </label>
-                <br />
-                <label>
-                    Last Name:
-                    <input type="text" name="lastName" value={student.lastName} onChange={event => setStudent({ ...student, lastName: event.target.value })} />
-                </label>
-                <br />
-                <label>
-                    Age:
-                    <input type="number" name="age" value={student.age} onChange={event => setStudent({ ...student, age: event.target.value })} />
-                </label>
-                <br />
-                <input type="submit" value="Save" />
-            </form>
+            <button type="button" onClick={handleEdit}>
+                Edit
+            </button>
         );
     };
-
-    const TableDelete = (props) => {
-        function handleDelete() {
-            // Delete the student using the API here
+    function TableDelete(props) {
+        const handleDelete = () => {
+            // Add code to open the form for deleting the student's information
+            alert("Delete");
+            console.log("test");
         }
 
         return (
@@ -100,25 +81,40 @@ const DataTable = () => {
             </button>
         );
     };
-
-    const TableDetails = (props) => {
-        const [student, setStudent] = useState({ studentList });
-
-        useEffect(() => {
-            fetch(`/api/students/${props.id}`)
-                .then(res => res.json())
-                .then(data => setStudent(data));
-        }, [props.id]);
+    function ShowStudentDetails(...props) { // TableDetails
+        const handleDetails = () => {
+            alert("details");
+            // Add code to open the form for showing the student's information
+            // Formulär för eventuell redigering av datan.
+            // Document.GetElementById("detailsDiv"); -> följande data.
+            //<tr key={props.student.id}>
+            //    <td>{props.student.id}</td>
+            //    <td>{props.student.firstName}</td>
+            //    <td>{props.student.lastName}</td>
+            //    <td>{props.student.age}</td>
+            //    <td>{props.student.birthdate}</td>
+            //    <td>{props.student.country}</td>
+            //    <td>{props.student.city}</td>
+            //</tr>
+            <Form>
+            </Form>
+        }
 
         return (
-            <div>
-                <p>ID: {student.id}</p>
-                <p>First Name: {student.firstName}</p>
-                <p>Last Name: {student.lastName}</p>
-                <p>Age: {student.age}</p>
-            </div>
+            <button type="button" onClick={handleDetails}>
+                Details
+            </button>
         );
     };
+
+
+    function TableAction(props) {
+        return (
+            <button type="button" {...props}>
+                {props.children}
+            </button>
+        );
+    }
 
     function TableRow(props) {
         return (
@@ -129,13 +125,10 @@ const DataTable = () => {
                         <td>{student.firstName}</td>
                         <td>{student.lastName}</td>
                         <td>{student.age}</td>
-                        <td>{student.birthdate}</td>
-                        <td>{student.country}</td>
-                        <td>{student.city}</td>
                         <td>
-                            <TableAction>Edit</TableAction>
-                            <TableAction>Delete</TableAction>
-                            <TableAction>Details</TableAction>
+                            <TableEdit>Edit</TableEdit>
+                            <TableDelete>Delete</TableDelete>
+                            <ShowStudentDetails>Details</ShowStudentDetails>
                         </td>
                     </tr>
                 ))}
@@ -150,5 +143,7 @@ const DataTable = () => {
         </table>
     );
 };
+
+
 
 export default DataTable;

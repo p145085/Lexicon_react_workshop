@@ -7,6 +7,8 @@ const Form = () => {
         savePerson(data);
     };
 
+    const [persons, setPersons] = useState([]);
+
     const savePerson = person => {
         fetch('/api/persons', {
             method: 'POST',

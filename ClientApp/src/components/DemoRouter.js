@@ -1,5 +1,7 @@
-﻿import React from 'react';
+﻿import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import DataTable from './DataTable';
+import initialState from './DataTable';
 
 const Welcome = () => <h1>Welcome</h1>;
 const About = () => <h1>About</h1>;
@@ -14,6 +16,7 @@ const Header = () => (
         <Link to="/person">Person</Link>
         <Link to="/about">About</Link>
         <Link to="/data-table">DataTable</Link>
+        <Link to="/crud">CrudDemo</Link>
     </nav>
 );
 
@@ -21,13 +24,15 @@ const DemoRouter = () => (
     <Router>
         <Header />
         <Switch>
-            <Route exact path="/" component={Welcome} />
+            <Route exact path="/" component={Welcome} /> 
             <Route exact path="/home" component={Home} />
             <Route exact path="/person" component={Person} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/crud" component={CrudDemo} />
             <Route component={NotFound} />
         </Switch>
     </Router>
 );
+
 
 export default DemoRouter;
